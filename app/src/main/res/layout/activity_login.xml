@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".login">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:src="@drawable/signup"
+        ></ImageView>
+
+
+    <EditText
+
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/edittext"
+        android:hint="Email"
+        android:paddingLeft="23dp"
+        android:textSize="23sp"
+        android:id="@+id/emailtologin"
+
+        ></EditText>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/edittext"
+        android:hint="Password"
+        android:paddingLeft="23dp"
+        android:textSize="23sp"
+        android:id="@+id/passwordtologin"
+
+        ></EditText>
+    <Button
+        android:layout_marginTop="25dp"
+        android:id="@+id/loginto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/button"
+        android:padding="20dp"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:text="Press to Login..."
+        android:textColor="@android:color/white"/>
+    <TextView
+        android:id="@+id/logoutplease"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="log out...."
+        android:textSize="22sp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="right"
+        android:textColor="@color/blue"
+        ></TextView>
+
+
+</LinearLayout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:id="@+id/layoutformainpage"
+
+    >
+
+    <ImageView
+        android:id="@+id/imageviewformainpage"
+        android:layout_width="226dp"
+        android:layout_height="match_parent"
+
+
+        />
+
+    <LinearLayout
+        android:id="@+id/innerfortext"
+        android:layout_width="194dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="hello"
+            android:paddingTop="30dp"
+            android:id="@+id/mainpageaddress"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:layout_height="100dp">
+
+        </TextView>
+
+        <TextView
+            android:paddingTop="30dp"
+            android:text="magi"
+            android:id="@+id/mainpageprize"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:layout_height="98dp">
+
+        </TextView>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

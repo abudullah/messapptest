@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".addnewmess">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="200dp">
+
+    <ImageView
+        android:id="@+id/home_image"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:background="@drawable/squareshape"
+        android:cropToPadding="false"
+        android:scaleType="centerCrop"
+        android:src="@drawable/addimage" />
+
+
+
+
+</LinearLayout>
+
+
+    <EditText
+        android:id="@+id/titleforrent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:inputType="textMultiLine"
+        android:layout_marginTop="20dp"
+        android:padding="20dp"
+        android:hint="Title"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:background="@drawable/squareshape"
+
+
+        />
+
+
+    <EditText
+        android:id="@+id/homedescription"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+
+        android:inputType="textMultiLine"
+        android:layout_marginTop="6dp"
+        android:padding="20dp"
+        android:hint="Description..."
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:background="@drawable/squareshape"
+
+        />
+
+
+    <EditText
+        android:id="@+id/home_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:inputType="textMultiLine"
+        android:layout_marginTop="6dp"
+        android:padding="20dp"
+        android:hint="location..."
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:background="@drawable/squareshape"
+
+        />
+    <EditText
+        android:id="@+id/home_rent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/product_description"
+        android:inputType="textMultiLine"
+        android:layout_marginTop="6dp"
+        android:padding="20dp"
+        android:hint="Rent..."
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:background="@drawable/squareshape"
+
+        />
+
+
+    <Button
+        android:id="@+id/addnewhomeimage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="Add Please"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="45dp"
+        android:padding="17dp"
+        android:layout_marginTop="20dp"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:background="@drawable/button"
+        />
+
+</LinearLayout>
