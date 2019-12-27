@@ -3,9 +3,16 @@ package com.example.pola;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
@@ -29,8 +36,9 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
     private EditText name,password,Email,phonenumber;
     private ProgressDialog loadingBar;
    private Button signup;
-    DatabaseReference myRef;
-    String phonumber,nam;
+   private DatabaseReference myRef;
+   private String phonumber,nam;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
 
 
     @Override
@@ -43,11 +51,16 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
         signup=findViewById(R.id.tosignup);
         signup.setOnClickListener(this);
         phonenumber=findViewById(R.id.phonenumber);
+       // persmission(Manifest.permission.ACCESS_NETWORK_STATE);
 
 
         // Initialize Firebase Auth
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-         myRef = database.getReference("mess");
+        try {
+            myRef = database.getReference("mess");
+        }catch(Exception e)
+        {
+            show("fuck you"+e);
+        }
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -105,7 +118,7 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
 
                         } else {
                             loadingBar.dismiss();
-                            show("hell you go");
+                            show("sorry email you put must be wrong");
                             // If sign in fails, display a message to the user.
 
                         }
@@ -114,7 +127,7 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
                     }
                 });
     }
-    void show(String e)
+  private  void show(String e)
     {
         AlertDialog.Builder a=new AlertDialog.Builder(this);
         a.setMessage(e);
@@ -127,30 +140,49 @@ public class signup extends AppCompatActivity implements View.OnClickListener {
         if(v.getId()==R.id.tosignup)
         {
             String em,pass;
-            nam=name.getText().toString();
-            em=Email.getText().toString();
-            pass=password.getText().toString();
-            phonumber=phonenumber.getText().toString();
+            nam=name.getText().toString().trim();
+            em=Email.getText().toString().trim();
+            pass=password.getText().toString().trim();
+            phonumber=phonenumber.getText().toString().trim();
             if (TextUtils.isEmpty(em))
             {
-                Toast.makeText(this, "Please write your phone number...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Please write your email...", Toast.LENGTH_SHORT).show();
             }
             if (TextUtils.isEmpty(nam))
             {
-                Toast.makeText(this, "Please write your phone number...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Please write your  name...", Toast.LENGTH_SHORT).show();
             }
             if (TextUtils.isEmpty(pass))
             {
-                Toast.makeText(this, "Please write your phone number...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Please write your password...", Toast.LENGTH_SHORT).show();
             }
-          else
+            if(pass.length()<=6 )
+            {
+                Toast.makeText(this, "put password between greaterthan 6...", Toast.LENGTH_SHORT).show();
+            }
+
+
+              if(isNetworkAvailable())
+              {
               signupuser(em,pass);
+              }
+              else{
+                  show("please connect to internet");
+              }
 
         }
 
 
 
         }
+    private boolean isNetworkAvailable() {
+
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
     }
 
 

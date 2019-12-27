@@ -14,7 +14,7 @@
 
 
     <EditText
-
+         android:inputType="textEmailAddress"
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_marginTop="25dp"
@@ -27,6 +27,7 @@
         ></EditText>
 
     <EditText
+        android:inputType="numberPassword"
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_marginTop="25dp"
@@ -52,6 +53,7 @@
         android:text="Press to Login..."
         android:textColor="@android:color/white"/>
     <TextView
+
         android:id="@+id/logoutplease"
         android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
@@ -62,6 +64,7 @@
         android:layout_gravity="right"
         android:textColor="@color/blue"
         ></TextView>
+
 
 
 </LinearLayout>

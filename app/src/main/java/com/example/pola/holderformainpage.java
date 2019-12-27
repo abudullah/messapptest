@@ -8,8 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class holderformainpage extends RecyclerView.ViewHolder implements View.OnClickListener {
-    TextView mainpageadress,mainpageprize;
-    ImageView imageViewformainpage;
+   TextView mainpageadress,mainpageprize;
+   ImageView imageViewformainpage;
 
 
     public holderformainpage(@NonNull View itemView) {

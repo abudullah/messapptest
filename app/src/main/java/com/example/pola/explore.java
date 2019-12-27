@@ -59,7 +59,7 @@ public class explore extends AppCompatActivity implements NavigationView.OnNavig
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
        arraylistforfirstpage=new ArrayList<homerentdepcription>();
-       productsref= FirebaseDatabase.getInstance().getReference().child("mess").child("location").child("hjj");
+       productsref= FirebaseDatabase.getInstance().getReference().child("allpost");
        if(productsref!=null) {
            show("" + productsref.getPath());
        }
@@ -120,7 +120,7 @@ public class explore extends AppCompatActivity implements NavigationView.OnNavig
 
 
     }
-  void  show(String massage)
+  private void  show(String massage)
   {
       AlertDialog.Builder a=new AlertDialog.Builder(this);
       a.setMessage(massage);
@@ -131,51 +131,49 @@ public class explore extends AppCompatActivity implements NavigationView.OnNavig
     protected void onStart()
     {
         super.onStart();
+        try {
 
-        FirebaseRecyclerOptions<homerentdepcription> options =
-                new FirebaseRecyclerOptions.Builder<homerentdepcription>()
-                        .setQuery(productsref, homerentdepcription.class)
-                        .build();
-
-
-        FirebaseRecyclerAdapter<homerentdepcription, holderformainpage> adapter =
-                new FirebaseRecyclerAdapter<homerentdepcription, holderformainpage>(options) {
-                    @Override
-                    protected void onBindViewHolder(@NonNull holderformainpage holder, int position, @NonNull final homerentdepcription model)
-                    {
-                        holder.mainpageadress.setText(model.getHomerent());
-                        holder.mainpageprize.setText(model.getHomelocation());
-                        try {
-                            Picasso.with(explore.this).load(model.getURL().trim()).into(holder.imageViewformainpage);
-                        }
-                        catch(Exception e)
-                        {
-                            show(""+e);
-                        }
+            FirebaseRecyclerOptions<homerentdepcription> options =
+                    new FirebaseRecyclerOptions.Builder<homerentdepcription>()
+                            .setQuery(productsref, homerentdepcription.class)
+                            .build();
 
 
-
-
-                        holder.itemView.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view)
-                            {
-
+            FirebaseRecyclerAdapter<homerentdepcription, holderformainpage> adapter =
+                    new FirebaseRecyclerAdapter<homerentdepcription, holderformainpage>(options) {
+                        @Override
+                        protected void onBindViewHolder(@NonNull holderformainpage holder, int position, @NonNull final homerentdepcription model) {
+                            holder.mainpageadress.setText(model.getHomerent());
+                            holder.mainpageprize.setText(model.getHomelocation());
+                            try {
+                                Picasso.with(explore.this).load(model.getURL()).into(holder.imageViewformainpage);
+                            } catch (Exception e) {
+                                show("" + e);
                             }
-                        });
-                    }
 
-                    @NonNull
-                    @Override
-                    public holderformainpage onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
-                    {
-                        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.addingtofirebasemainpage, parent, false);
-                        holderformainpage holder = new holderformainpage(view);
-                        return holder;
-                    }
-                };
-        recyclerView.setAdapter(adapter);
-        adapter.startListening();
+
+                            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+                                }
+                            });
+                        }
+
+                        @NonNull
+                        @Override
+                        public holderformainpage onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.addingtofirebasemainpage, parent, false);
+                            holderformainpage holder = new holderformainpage(view);
+                            return holder;
+                        }
+                    };
+            recyclerView.setAdapter(adapter);
+            adapter.startListening();
+        }catch (Exception e)
+        {
+            show("Exception e"+e);
+        }
     }
 
 

@@ -1,7 +1,7 @@
 package com.example.pola;
 
 public class homerentdepcription {
- String Currenttime,URL,currentdate,homedescription,homelocation,homerent,title,uid;
+ private String Currenttime,URL,currentdate,homedescription,homelocation,homerent,title,uid;
 
     public homerentdepcription() {
     }

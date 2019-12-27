@@ -4,7 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -95,17 +98,27 @@ public class login extends AppCompatActivity implements View.OnClickListener {
             }
             if (TextUtils.isEmpty(pas))
             {
-                Toast.makeText(this, "Please write your email number...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Please write your password...", Toast.LENGTH_SHORT).show();
             }
             FirebaseUser currentUser = mAuth.getCurrentUser();
-            if(currentUser==null) {
-                login(em, pas);
+            if(isNetworkAvailable()) {
+                if (currentUser == null) {
+                    login(em, pas);
+                }
+                else{
+                    Toast.makeText(this, "log out first please", Toast.LENGTH_SHORT).show();
+
+                }
             }
+            else {
+                Toast.makeText(this, "connect to internet please ", Toast.LENGTH_SHORT).show();
+            }
+
         }
 
         if(v.getId()==R.id.logoutplease)
         {FirebaseUser currentUser = mAuth.getCurrentUser();
-            if(currentUser!=null) {  loadingBar.setTitle("Login Account");
+            if(currentUser!=null) {  loadingBar.setTitle("Logging out Account");
                 loadingBar.setMessage("Please wait, while we logging out you....");
                 loadingBar.setCanceledOnTouchOutside(false);
                 loadingBar.show();
@@ -114,7 +127,7 @@ public class login extends AppCompatActivity implements View.OnClickListener {
             }
             if(currentUser==null)
             {  loadingBar.dismiss();
-                Toast.makeText(this, "successfully logedout", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "successfully logged-out", Toast.LENGTH_SHORT).show();
 
             }
 
@@ -122,5 +135,12 @@ public class login extends AppCompatActivity implements View.OnClickListener {
 
         }
 
+    }
+    private boolean isNetworkAvailable() {
+
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

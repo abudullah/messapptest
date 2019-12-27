@@ -35,6 +35,7 @@ import java.util.HashMap;
 public class addnewmess extends AppCompatActivity implements View.OnClickListener {
 
 ImageView homeimage,homeimage1;
+
 String saveCurrentDate, saveCurrentTime;
   private  EditText title,homedescription,homelocation,homerent;
  private   Button addnewhomeimage;
@@ -47,10 +48,13 @@ String saveCurrentDate, saveCurrentTime;
     private ProgressDialog loadingBar;
     String downloadImageUrl;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference mess = database.getReference("mess");
+    DatabaseReference mess = database.getReference();
+    String key;
     DatabaseReference usertodelete=mess.child("usertodelete");
     DatabaseReference division=mess.child("location");
-    DatabaseReference searchbydate=mess.child("searchbydate");
+    DatabaseReference allpost=mess.child("allpost");
+
+
 
 
 
@@ -112,7 +116,10 @@ String saveCurrentDate, saveCurrentTime;
 
             StoreProductInformation();
             try {
-                SaveProductInfoToDatabase();
+                key=mess.push().getKey();
+                if(homeimage!=null) {
+                    SaveProductInfoToDatabase();
+                }
             }catch(Exception e)
             {
                 show(""+e);
@@ -183,6 +190,7 @@ String saveCurrentDate, saveCurrentTime;
     private void SaveProductInfoToDatabase()
     {  final String ti,homedes,homloca,hom;
 
+
         ti=title.getText().toString();
         homedes=homedescription.getText().toString();
         homloca=homelocation.getText().toString();
@@ -200,7 +208,7 @@ String saveCurrentDate, saveCurrentTime;
 
 if(currentFirebaseUser!=null) {
     String hell = currentFirebaseUser.getUid().toString();
-    usertodelete.child(hell).push().updateChildren(productMap)
+    usertodelete.child(hell).child(key).updateChildren(productMap)
             .addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -219,7 +227,24 @@ if(currentFirebaseUser!=null) {
             });
 
 
-    division.child(productMap.get("homelocation").toString()).push().updateChildren(productMap)
+    division.child(productMap.get("homelocation").toString()).child(key).updateChildren(productMap)
+            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+
+
+                        //loadingBar.dismiss();
+
+
+                    } else {
+
+                        String message = task.getException().toString();
+                        show("" + task.getException().toString());
+                    }
+                }
+            });
+    allpost.child(key).updateChildren(productMap)
             .addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -227,7 +252,7 @@ if(currentFirebaseUser!=null) {
 
 
                         loadingBar.dismiss();
-                        show("fuck successfull for division");
+                        show("succesfully uploaded");
 
                     } else {
                         loadingBar.dismiss();
@@ -236,7 +261,6 @@ if(currentFirebaseUser!=null) {
                     }
                 }
             });
-
 
 
 }else{

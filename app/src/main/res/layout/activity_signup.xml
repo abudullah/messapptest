@@ -20,6 +20,7 @@
         android:hint="phonenumber"
         android:paddingLeft="23dp"
         android:textSize="23sp"
+        android:inputType="number"
         android:id="@+id/phonenumber"
 
         ></EditText>
@@ -30,6 +31,7 @@
         android:layout_marginTop="25dp"
         android:background="@drawable/edittext"
         android:hint="Name"
+        android:inputType="textPersonName"
         android:paddingLeft="23dp"
         android:textSize="23sp"
         android:id="@+id/name"
@@ -45,6 +47,8 @@
         android:paddingLeft="23dp"
         android:textSize="23sp"
         android:id="@+id/email"
+        android:inputType="textEmailAddress"
+
 
         ></EditText>
 
@@ -54,9 +58,11 @@
         android:layout_marginTop="25dp"
         android:background="@drawable/edittext"
         android:hint="Password"
+
         android:paddingLeft="23dp"
         android:textSize="23sp"
         android:id="@+id/password"
+        android:inputType="numberPassword"
 
         ></EditText>
     <Button
